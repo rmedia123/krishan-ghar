@@ -171,8 +171,8 @@
   initScrollReveal();
 
   /* ── Contact Form with Validation ── */
-  const SUPABASE_URL = 'SUPABASE_URL';
-  const SUPABASE_ANON_KEY = 'SUPABASE_ANON_KEY';
+  const SUPABASE_URL = 'https://cjwsynqqirrkhnfiucov.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNqd3N5bnFxaXJya2huZml1Y292Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzNjUzNTAsImV4cCI6MjA4OTk0MTM1MH0.oBqmJXnPKJpGQRhSFGrz5lEXsirofDnnpVy3tFnbLQg';
   const NOTIFICATION_EMAIL = 'info@krishanghar.com';
 
   const contactForm = document.getElementById('contact-form');
@@ -256,10 +256,10 @@
 
       const data = {
         name: formData.get('name'),
-        business: formData.get('business'),
+        business_name: formData.get('business'),
         email: formData.get('email'),
         phone: formData.get('phone'),
-        categories: checkedCategories.join(', ') || null,
+        categories: checkedCategories.length > 0 ? checkedCategories : null,
         message: formData.get('message') || null
       };
 
@@ -281,9 +281,9 @@
           const emailBody = new FormData();
           emailBody.append('name', data.name);
           emailBody.append('email', data.email);
-          emailBody.append('business', data.business);
+          emailBody.append('business_name', data.business_name);
           emailBody.append('phone', data.phone || 'Not provided');
-          emailBody.append('categories', data.categories || 'Not specified');
+          emailBody.append('categories', (Array.isArray(data.categories) ? data.categories.join(', ') : data.categories) || 'Not specified');
           emailBody.append('message', data.message || 'No message');
           emailBody.append('_subject', 'New Wholesale Inquiry — Krishan Ghar');
           emailBody.append('_template', 'table');
@@ -303,9 +303,9 @@
           const emailBody = new FormData();
           emailBody.append('name', data.name);
           emailBody.append('email', data.email);
-          emailBody.append('business', data.business);
+          emailBody.append('business_name', data.business_name);
           emailBody.append('phone', data.phone || 'Not provided');
-          emailBody.append('categories', data.categories || 'Not specified');
+          emailBody.append('categories', (Array.isArray(data.categories) ? data.categories.join(', ') : data.categories) || 'Not specified');
           emailBody.append('message', data.message || 'No message');
           emailBody.append('_subject', 'New Wholesale Inquiry — Krishan Ghar');
           emailBody.append('_template', 'table');
